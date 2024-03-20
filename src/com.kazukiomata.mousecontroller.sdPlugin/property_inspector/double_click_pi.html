@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <!-- localhostでの名前がわかりやすくなる -->
+    <title>Double Click PI</title>
+    <link rel="stylesheet" href="sdk/css/sdpi.css">
+</head>
+
+<body>
+<div class="sdpi-wrapper">
+
+    <!-- current coordinate   -->
+    <div>
+        <details class="message info">
+            <summary>Current Mouse Coordinate</summary>
+        </details>
+        <div class="sdpi-item-value" id="current-mouse-coordinate">
+            <details class="message pointer">
+                <summary id="current-mouse-coordinate-x"><span>x : </span><span id="current-mouse-coordinate-x-value">0</span></summary>
+                <summary id="current-mouse-coordinate-y"><span>y : </span><span id="current-mouse-coordinate-y-value">0</span></summary>
+            </details>
+        </div>
+    </div>
+
+    <!-- Set coordinates   -->
+    <div>
+        <details class="message info">
+            <summary>Set Coordinate</summary>
+        </details>
+        <div class="sdpi-item-value" id="set-coordinate">
+            <details class="message pointer">
+                <summary id="set-coordinate-x"><span>x : </span><span id="set-coordinate-x-value">0</span></summary>
+                <summary id="set-coordinate-y"><span>y : </span><span id="set-coordinate-y-value">0</span></summary>
+            </details>
+        </div>
+    </div>
+
+
+<!--    <div class="sdpi-item" style="max-height: 60px">-->
+<!--        <div class="sdpi-item-label">Current_Coordinate</div>-->
+<!--        <div class="sdpi-item-value" id="current-coordinate">-->
+<!--            <span class="sdpi-item-child">-->
+<!--                x:0-->
+<!--            </span>-->
+<!--            <span class="sdpi-item-child">-->
+<!--                y:0-->
+<!--            </span>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="sdpi-item">-->
+<!--        <details class="message pointer">-->
+<!--            <summary>Manual</summary>-->
+<!--            <p>Category: Enter a word or words separated by commas to search for the image. This field does not accept-->
+<!--                spaces.</p>-->
+<!--            <p>Union type: If you have entered more than one word in the "Category" field, then select as the union-->
+<!--                option.-->
+<!--                If "and" is selected, images matching all the specified words will be searched. If "or" is selected,-->
+<!--                images-->
+<!--                matching at least one of the words will be searched.</p>-->
+<!--            <p>Grayscale: Check the box if you want the image to be grayscale.</p>-->
+<!--        </details>-->
+<!--    </div>-->
+
+<!--    <div class="sdpi-item">-->
+<!--        <div class="sdpi-item-label">Category</div>-->
+<!--        <input class="sdpi-item-value" id="category" value="" placeholder="Category"-->
+<!--               onchange="onchange_category()" pattern="\S*">-->
+<!--        <label for="category"></label>-->
+<!--    </div>-->
+
+<!--    <div type="radio" class="sdpi-item" id="union_type" onchange="onchange_union_type()">-->
+<!--        <div class="sdpi-item-label">Union type</div>-->
+<!--        <div class="sdpi-item-value">-->
+<!--            <span class="sdpi-item-child">-->
+<!--                <input id="union_type_or" type="radio" value="or" name="union_type">-->
+<!--                <label for="union_type_or" class="sdpi-item-label"><span></span>or</label>-->
+<!--            </span>-->
+<!--            <span class="sdpi-item-child">-->
+<!--                <input id="union_type_and" type="radio" value="and" name="union_type">-->
+<!--                <label for="union_type_and" class="sdpi-item-label"><span></span>and</label>-->
+<!--            </span>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <div type="radio" class="sdpi-item" id="record-type" onchange="onchange_record_type()">
+        <div class="sdpi-item-label">Record Type</div>
+        <div class="sdpi-item-value ">
+            <span class="sdpi-item-child">
+                <input id="record-type-not" type="radio" value="not" name="record-type" >
+                <label for="record-type-not" class="sdpi-item-label"><span></span>not record</label>
+            </span>
+            <span class="sdpi-item-child">
+                <input id="record-type-current" type="radio" value="current_mouse_coordinate" name="record-type" >
+                <label for="record-type-current" class="sdpi-item-label"><span></span>current mouse coordinate</label>
+            </span>
+            <span class="sdpi-item-child">
+                <input id="record-type-input" type="radio" value="below_input" name="record-type" checked>
+                <label for="record-type-input" class="sdpi-item-label"><span></span>below input</label>
+            </span>
+        </div>
+    </div>
+
+<!--    <div type="checkbox" class="sdpi-item">-->
+<!--        <div class="sdpi-item-label">Grayscale</div>-->
+<!--        <input class="sdpi-item-value" id="grayscale_flag" type="checkbox"-->
+<!--               onchange="onchange_grayscale_flag()">-->
+<!--        <label for="grayscale_flag"><span></span></label>-->
+<!--    </div>-->
+
+    <div class="sdpi-item"  title="you can enter the mouse coordinate, you want to set it">
+        <div class="sdpi-item-label">input x</div>
+        <div class="sdpi-item-value" >
+            <input class="sdpi-item-value" id="input-coordinate-value-x"  value="" placeholder="e.g. 300. must be number" pattern="\d{1,5}" onchange="onchange_input_x()">
+        </div>
+    </div>
+    <div class="sdpi-item" title="you can enter the mouse coordinate, you want to set it">
+        <div class="sdpi-item-label">input y</div>
+
+        <div class="sdpi-item-value" >
+            <input class="sdpi-item-value" id="input-coordinate-value-y"  value="" placeholder="e.g. 400. must be number" pattern="\d{1,5}" onchange="onchange_input_y()">
+        </div>
+    </div>
+
+
+    <div class="sdpi-item">
+        <div class="sdpi-item-label">update</div>
+        <button class="sdpi-item-value max20" id="set-button" onchange="onchange_set_button()">Set</button>
+    </div>
+
+
+
+</div>
+
+<script src="sdk/js/constants.js"></script>
+<script src="sdk/js/events.js"></script>
+<script src="sdk/js/api.js"></script>
+<script src="sdk/js/property-inspector.js"></script>
+<script src="sdk/js/dynamic-styles.js"></script>
+<script>
+    console.log('Property Inspector loaded', $PI);
+
+    const current_mouse_coordinate_x_el = document.getElementById("current-mouse-coordinate-x-value");
+    const current_mouse_coordinate_y_el = document.getElementById("current-mouse-coordinate-y-value");
+
+    const set_coordinate_x_el = document.getElementById("set-coordinate-x-value");
+    const set_coordinate_y_el = document.getElementById("set-coordinate-y-value");
+
+    
+    const record_type_not_el = document.getElementById("record-type-not");
+    const record_type_current_el = document.getElementById("record-type-current");
+    const record_type_input_el = document.getElementById("record-type-input");
+
+    const input_coordinate_x_el = document.getElementById("input-coordinate-value-x");
+    const input_coordinate_y_el = document.getElementById("input-coordinate-value-y");
+
+    const set_button_el = document.getElementById("set-button");
+
+
+    let settings;
+
+    $PI.onConnected(jsn => {
+
+        // pluginよりも先にこれが呼ばれる
+        // その後に、plugin側のon_will_appear()が呼ばれるため、
+        // そこに、set_setting())を呼んでいたら、PI側のonDidReceiveSettings()が発火
+
+        console.log('Property Inspector connected', jsn);
+        console.log("jsn.actionInfo.payload.settings : ");
+        console.log(jsn.actionInfo.payload.settings);
+        // console.log("onConnected global settings : ")
+        // console.log($PI.getGlobalSettings());
+
+        settings = jsn.actionInfo.payload.settings;
+
+        //optional chaining
+        //https://qiita.com/youtoy/items/ff5da7b32596669fa840
+
+        if (settings?.current_mouse_coordinate_x) {
+            current_mouse_coordinate_x_el.textContent = settings.current_mouse_coordinate_x
+        } else {
+            current_mouse_coordinate_x_el.textContent = 0
+            settings["current_mouse_coordinate_x"] = current_mouse_coordinate_x_el.textContent
+        }
+        if (settings?.current_mouse_coordinate_y) {
+            current_mouse_coordinate_y_el.textContent = settings.current_mouse_coordinate_y
+        } else {
+            current_mouse_coordinate_y_el.textContent = 0
+            settings["current_mouse_coordinate_y"] = current_mouse_coordinate_y_el.textContent
+        }
+
+
+       if (settings?.set_coordinate_x) {
+            set_coordinate_x_el.textContent = settings.set_coordinate_x
+       } else {
+            set_coordinate_x_el.textContent = 0
+            settings["set_coordinate_x"] = set_coordinate_x_el.textContent
+       }
+       if (settings?.set_coordinate_y) {
+            set_coordinate_y_el.textContent = settings.set_coordinate_y
+       } else {
+            set_coordinate_y_el.textContent = 0
+            settings["set_coordinate_y"] = set_coordinate_y_el.textContent
+       }
+
+       
+        if (settings?.record_type == record_type_not_el.id) {
+            record_type_not_el.checked = true
+            record_type_current_el.checked = false
+            record_type_input_el.checked = false
+            settings["record_type"] = record_type_not_el.id
+
+        }else if (settings?.record_type == record_type_current_el.id) {
+            record_type_not_el.checked = false
+            record_type_current_el.checked = true
+            record_type_input_el.checked = false
+            settings["record_type"] = record_type_current_el.id
+
+        } else if (settings?.record_type == record_type_input_el.id) {
+            record_type_not_el.checked = false
+            record_type_current_el.checked = false
+            record_type_input_el.checked = true
+            settings["record_type"] = record_type_input_el.id
+
+        } else {
+            //例外処理
+            console.log("record_type_input_el.value is unexpected value. please check");
+            record_type_not_el.checked = true
+            record_type_current_el.checked = false
+            record_type_input_el.checked = false
+            settings["record_type"] = record_type_not_el.id
+        }
+
+
+        if (settings?.input_coordinate_x) {
+            input_coordinate_x_el.value = settings.input_coordinate_x
+       } else {
+            input_coordinate_x_el.value = 0
+            settings["input_coordinate_x"] = input_coordinate_x_el.value
+       }
+       if (settings?.input_coordinate_y) {
+            input_coordinate_y_el.value = settings.input_coordinate_y
+       } else {
+            input_coordinate_y_el.value = 0
+            settings["input_coordinate_y"] = input_coordinate_y_el.value
+       }
+
+
+
+
+
+        $PI.setSettings(settings);
+
+
+    });
+
+    $PI.onSendToPropertyInspector("com.kazukiomata.mousecontroller.doubleclick", jsn => {
+        payload = jsn.payload;
+        console.log("here is double click pi");
+        console.log("jsn");
+        console.log(jsn);
+        console.log("payload");
+        console.log(payload);
+
+        current_mouse_coordinate_x_el.textContent = payload.current_mouse_coordinate_x;
+        current_mouse_coordinate_y_el.textContent = payload.current_mouse_coordinate_y;
+        set_coordinate_x_el.textContent = payload.set_coordinate_x;
+        set_coordinate_y_el.textContent = payload.set_coordinate_y;
+
+
+    });
+
+    // $PI.onSendToPropertyInspector("com.kazukiomata.mousecontroller.doubleclick", jsn => {
+    //    payload = jsn.payload;
+    //    console.log("here is onSendToPropertyInspector");
+    //    console.log("jsn");
+    //    console.log(jsn);
+    //    console.log("payload");
+    //    console.log(payload);
+
+    //    current_mouse_coordinate_x_el.textContent = payload.current_mouse_coordinate_x;
+    //    current_mouse_coordinate_y_el.textContent = payload.current_mouse_coordinate_y;
+    //   set_coordinate_x_el.textContent = payload.set_coordinate_x;
+    //    set_coordinate_y_el.textContent = payload.set_coordinate_y;
+
+
+    // });
+
+
+    // getSettings()が呼ばれると発火
+    $PI.onDidReceiveSettings("com.kazukiomata.mousecontroller.doubleclick", jsn => {
+        payload = jsn.payload;
+        console.log("here is onDidReceveSettings");
+        // console.log("jsn");
+        console.log(jsn);
+        console.log("payload");
+        console.log(payload);
+        // console.log("event");
+        // console.log(pyaload?.event);
+        // if (payload?.event == "gloabl"){
+        //     console.log("global can get")
+        // }
+        console.log("settings")
+        console.log(settings)
+
+        // settings = jsn.actionInfo.payload.settings
+
+        updateSettingsFromPayload(payload.settings);
+
+
+    });
+
+    const updateSettingsFromPayload = function(payload) {
+        console.log()
+        settings["current_mouse_coordinate_x"] = payload.current_mouse_coordinate_x;
+        settings["current_mouse_coordinate_y"] = payload.current_mouse_coordinate_y;
+        settings["set_coordinate_x"] = payload.set_coordinate_x;
+        settings["set_coordinate_x"] = payload.set_coordinate_y;
+        current_mouse_coordinate_x_el.textContent = payload.current_mouse_coordinate_x;
+        current_mouse_coordinate_y_el.textContent = payload.current_mouse_coordinate_y;
+        set_coordinate_x_el.textContent = payload.set_coordinate_x;
+        set_coordinate_y_el.textContent = payload.set_coordinate_y;
+
+        settings["record_type"] = payload.record_type;
+        console.log(settings["record_type"])
+        // console.log(record_type_current_el.id)
+
+        if(settings?.record_type == record_type_not_el.id){
+            record_type_not_el.checked = true
+            record_type_current_el.checked = false
+            record_type_input_el.checked = false
+        }else if (settings?.record_type == record_type_current_el.id) {
+            record_type_not_el.checked = false
+            record_type_current_el.checked = true
+            record_type_input_el.checked = false
+
+        } else if (settings?.record_type == record_type_input_el.id) {
+            record_type_not_el.checked = false
+            record_type_current_el.checked = false
+            record_type_input_el.checked = true
+
+        } else {
+            //例外処理
+            console.log("record_type_input_el.value is unexpected value. please check");
+            record_type_not_el.checked = true
+            record_type_current_el.checked = false
+            record_type_input_el.checked = false
+            settings["record_type"] = record_type_not_el.id
+        }
+
+       settings["input_coordinate_x"] = payload.input_coordinate_x;
+       settings["input_coordinate_y"] = payload.input_coordinate_y;
+       if (settings?.input_coordinate_x) {
+            input_coordinate_x_el.value = settings.input_coordinate_x
+       } else {
+            input_coordinate_x_el.value = 0
+            settings["input_coordinate_x"] = input_coordinate_x_el.value
+       }
+       if (settings?.input_coordinate_y) {
+            input_coordinate_y_el.value = settings.input_coordinate_y
+       } else {
+            input_coordinate_y_el.value = 0
+            settings["input_coordinate_y"] = input_coordinate_y_el.value
+       }
+
+       
+       settings["set_button"] = payload.set_button;
+       
+
+
+    }
+
+    $PI.onDidReceiveGlobalSettings(jsn => {
+        payload = jsn.payload;
+        console.log("here is onDidReceveGlobalSettings");
+        console.log("jsn");
+        console.log(jsn);
+        console.log("payload");
+        console.log(payload);
+    });
+
+
+
+
+
+    const onchange_record_type = function() {
+        let record_type_el = null
+        if (record_type_current_el.checked) {
+            record_type_el = record_type_current_el
+        } else if (record_type_input_el.checked) {
+            record_type_el = record_type_input_el
+        }else if(record_type_not_el.checked){
+            record_type_el = record_type_not_el
+
+        }
+
+        if (record_type_el) {
+            console.log(record_type_el)
+            settings["record_type"] = record_type_el.id
+            console.log(settings["record_type"])
+            $PI.setSettings(settings);
+        }
+        $PI.setSettings(settings);
+
+    };
+
+
+
+    const onchange_input_x = function() {
+        console.log(input_coordinate_x_el.value);
+        console.log(input_coordinate_x_el.validity.valid);
+        //入力内容に問題がないか == validity.valid
+        if (input_coordinate_x_el.validity.valid && input_coordinate_x_el.value) {
+            settings["input_coordinate_x"] = input_coordinate_x_el.value
+            // $PI.setSettings(settings);
+        } else {
+            input_coordinate_x_el.value = settings.input_coordinate_x
+        }
+        $PI.setSettings(settings);
+
+    };
+
+    const onchange_input_y = function() {
+        console.log(input_coordinate_y_el.value);
+        console.log(input_coordinate_y_el.validity.valid)
+        //入力内容に問題がないか == validity.valid
+        if (input_coordinate_y_el.validity.valid && input_coordinate_y_el.value) {
+            settings["input_coordinate_y"] = input_coordinate_y_el.value
+            // $PI.setSettings(settings);
+        } else {
+            input_coordinate_y_el.value = settings.input_coordinate_y
+        }
+        $PI.setSettings(settings);
+
+    };
+
+    set_button_el.addEventListener('click', () => {
+        console.log('set_button_el is clicked');
+
+        console.log("button clicked");
+        console.log(input_coordinate_x_el.value);
+        console.log(input_coordinate_y_el.value);
+        settings["input_coordinate_x"] = input_coordinate_x_el.value;
+        settings["input_coordinate_y"] = input_coordinate_y_el.value;
+        settings["set_button"] = "clicked";
+        $PI.setSettings(settings);
+    });
+
+
+</script>
+</body>
+</html>

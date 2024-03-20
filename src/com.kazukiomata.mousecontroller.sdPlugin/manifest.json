@@ -1,0 +1,103 @@
+{
+  "Actions": [
+    {
+      "UUID": "com.kazukiomata.mousecontroller.doubleclick",
+      "Icon": "assets/images/keyimage_5",
+      "Name": "Double Click",
+      "States": [
+        {
+          "Image": "assets/images/keyimage_5"
+        }
+      ],
+      "PropertyInspectorPath": "property_inspector/double_click_pi.html",
+      "SupportedInMultiActions": true,
+      "Controllers": [
+        "Keypad",
+        "Encoder"
+      ],
+      "TriggerDescription": {
+        "Rotate": "Describe the rotation",
+        "Push": "Describe the encoder push",
+        "Touch": "Describe the touch",
+        "LongTouch": "Describe the long touch"
+      },
+      "Tooltip": "Set the mouse coordinate",
+      "UserTitleEnabled": true
+    },
+    {
+      "UUID": "com.kazukiomata.mousecontroller.click",
+      "Icon": "assets/images/keyimage_5",
+      "Name": "Click",
+      "States": [
+        {
+          "Image": "assets/images/keyimage_5"
+        }
+      ],
+      "PropertyInspectorPath": "property_inspector/click_pi.html",
+      "SupportedInMultiActions": true,
+      "Controllers": [
+        "Keypad",
+        "Encoder"
+      ],
+      "TriggerDescription": {
+        "Rotate": "Describe the rotation",
+        "Push": "Describe the encoder push",
+        "Touch": "Describe the touch",
+        "LongTouch": "Describe the long touch"
+      },
+      "Tooltip": "Set the mouse coordinate",
+      "UserTitleEnabled": true
+    },
+    {
+      "UUID": "com.kazukiomata.mousecontroller.rightclick",
+      "Icon": "assets/images/keyimage_5",
+      "Name": "Right Click",
+      "States": [
+        {
+          "Image": "assets/images/keyimage_5"
+        }
+      ],
+      "PropertyInspectorPath": "property_inspector/right_click_pi.html",
+      "SupportedInMultiActions": true,
+      "Controllers": [
+        "Keypad",
+        "Encoder"
+      ],
+      "TriggerDescription": {
+        "Rotate": "Describe the rotation",
+        "Push": "Describe the encoder push",
+        "Touch": "Describe the touch",
+        "LongTouch": "Describe the long touch"
+      },
+      "Tooltip": "Set the mouse coordinate",
+      "UserTitleEnabled": true
+    }
+
+
+  ],
+  "Author": "Kazuki Omata",
+  "CodePath": "run.sh",
+  "Description": "controll  your mouse",
+  "Icon": "assets/plugin_icon",
+  "Name": "Mouse_Control",
+  "Version": "1.0.0",
+  "SDKVersion": 2,
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.14"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Software": {
+    "MinimumVersion": "6"
+  },
+  "Category": "Kazuki-Omata",
+  "CategoryIcon": "assets/category_icon",
+  "CodePathMac": "run.sh",
+  "CodePathWin": "run.bat",
+  "URL": "https://github.com/gri-gus/loremflickr-streamdeck-plugin"
+}

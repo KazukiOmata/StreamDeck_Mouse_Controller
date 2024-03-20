@@ -1,0 +1,3 @@
+([('init',
+   '/Users/omakazu/program/01_multi_project/0002_TrimPass_StreamDeck/Mouse_Controller/src/dist/init',
+   'EXECUTABLE')],)
